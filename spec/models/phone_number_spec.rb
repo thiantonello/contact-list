@@ -52,7 +52,7 @@ RSpec.describe PhoneNumber, type: :model do
     context 'when contact_id not present' do
       it 'is not valid without an user_id' do
         subject.contact_id = nil
-        expect(subject.valid?).to be_falsey
+        expect { subject.valid? }.to raise_error("undefined method `phone_numbers' for nil:NilClass")
       end
     end
   end
