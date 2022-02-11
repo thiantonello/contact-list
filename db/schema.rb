@@ -12,15 +12,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_208_021_441) do
+ActiveRecord::Schema.define(version: 20_220_211_171_307) do
   create_table 'contacts', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'birth_date'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.integer 'user_id', null: false
-    t.index ['name'], name: 'index_contacts_on_name', unique: true
-    t.index ['user_id'], name: 'index_contacts_on_user_id'
+    t.integer 'user_id'
   end
 
   create_table 'phone_numbers', force: :cascade do |t|
@@ -29,9 +27,7 @@ ActiveRecord::Schema.define(version: 20_220_208_021_441) do
     t.boolean 'primary', default: false, null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.integer 'contact_id', null: false
-    t.index ['contact_id'], name: 'index_phone_numbers_on_contact_id'
-    t.index ['phone_number'], name: 'index_phone_numbers_on_phone_number', unique: true
+    t.integer 'contact_id'
   end
 
   create_table 'users', force: :cascade do |t|
@@ -40,7 +36,6 @@ ActiveRecord::Schema.define(version: 20_220_208_021_441) do
     t.text 'biography'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.index ['username'], name: 'index_users_on_username', unique: true
   end
 
   add_foreign_key 'contacts', 'users'
