@@ -12,22 +12,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_211_171_307) do
+ActiveRecord::Schema.define(version: 20_220_214_220_813) do
   create_table 'contacts', force: :cascade do |t|
     t.string 'name', null: false
-    t.string 'birth_date'
+    t.date 'birth_date'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.integer 'user_id'
+    t.index %w[user_id name], name: 'index_contacts_on_user_id_and_name', unique: true
   end
 
   create_table 'phone_numbers', force: :cascade do |t|
     t.string 'phone_number', null: false
-    t.string 'label', null: false
-    t.boolean 'primary', default: false, null: false
+    t.integer 'label', null: false
+    t.boolean 'main', default: false, null: false
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.integer 'contact_id'
+    t.index %w[contact_id phone_number], name: 'index_phone_numbers_on_contact_id_and_phone_number', unique: true
   end
 
   create_table 'users', force: :cascade do |t|
@@ -36,6 +38,7 @@ ActiveRecord::Schema.define(version: 20_220_211_171_307) do
     t.text 'biography'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.index ['username'], name: 'index_users_on_username', unique: true
   end
 
   add_foreign_key 'contacts', 'users'
