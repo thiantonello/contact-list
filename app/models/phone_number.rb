@@ -14,18 +14,15 @@ class PhoneNumber < ApplicationRecord
 
   def ensure_only_one_phone_number_is_primary
     return unless :primary?
-      contact.phone_numbers.update_all(primary: false)
+
+    contact.phone_numbers.update_all(primary: false)
   end
 
   def validate_only_one_phone_number_is_primary
     primary_counter = 0
-    contact.phone_numbers.each do | phone_number |
-      if phone_number.primary?
-        primary_counter += 1
-      end
+    contact.phone_numbers.each do |phone_number|
+      primary_counter += 1 if phone_number.primary?
     end
-    if primary_counter > 1
-      errors.add(:primary, "can only be true for one phone number")
-    end
+    errors.add(:primary, 'can only be true for one phone number') if primary_counter > 1
   end
 end
