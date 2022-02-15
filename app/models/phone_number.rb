@@ -7,14 +7,14 @@ class PhoneNumber < ApplicationRecord
   validates :label, presence: true
   enum label: { home: 0, work: 1, other: 2 }
   validates :main, inclusion: [true, false]
-  validate :validate_only_one_phone_number_is_main
+  validate :only_one_phone_number_is_main
 
   before_save :set_main_if_phone_numbers_is_empty
   before_save :ensure_only_one_phone_number_is_main
 
   private
 
-  def validate_only_one_phone_number_is_main
+  def only_one_phone_number_is_main
     main_counter = 0
 
     contact.phone_numbers.each do |phone_number|
