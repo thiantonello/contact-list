@@ -4,34 +4,48 @@ require 'rails_helper'
 
 RSpec.describe Contact, type: :model do
   describe 'validations' do
-    let(:user) do
-      User.create(username: 'Mike',
-                  biography: 'I am a developer',
-                  age: 25)
-    end
-
     subject do
       Contact.new(name: 'Rudolph',
-                  user_id: user.id)
+                  user: user)
     end
 
-    context 'when all attributes are present' do
+    let(:user) do
+      User.create!(username: 'Mike')
+    end
+
+    context 'when needed attributes are present' do
       it 'is valid' do
         expect(subject.valid?).to be_truthy
       end
     end
 
     context 'when name is not present' do
+      before { subject.name = nil }
+
       it 'is not valid without a name' do
-        subject.name = nil
         expect(subject.valid?).to be_falsey
+        expect(subject.errors.full_messages).to include("Name can't be blank")
+      end
+    end
+
+    context 'when name has already been taken' do
+      before do
+        Contact.create!(name: 'Rudolph',
+                        user: user)
+      end
+
+      it 'is not valid to use a taken phone_number' do
+        expect(subject.valid?).to be_falsey
+        expect(subject.errors.full_messages).to include('Name has already been taken')
       end
     end
 
     context 'when user_id not present' do
+      before { subject.user = nil }
+
       it 'is not valid without an user_id' do
-        subject.user_id = nil
         expect(subject.valid?).to be_falsey
+        expect(subject.errors.full_messages).to include('User must exist')
       end
     end
   end
