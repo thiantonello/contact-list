@@ -8,7 +8,7 @@ RSpec.describe PhoneNumber, type: :model do
       PhoneNumber.new(phone_number: '123',
                       label: 0,
                       main: true,
-                      contact_id: contact.id)
+                      contact: contact)
     end
 
     let(:user) do
@@ -19,7 +19,7 @@ RSpec.describe PhoneNumber, type: :model do
 
     let(:contact) do
       Contact.create!(name: 'Rudolph',
-                      user_id: user.id)
+                      user: user)
     end
 
     context 'when needed attributes are present' do
@@ -41,7 +41,7 @@ RSpec.describe PhoneNumber, type: :model do
       before do
         PhoneNumber.create!(phone_number: '123',
                             label: 0,
-                            contact_id: contact.id)
+                            contact: contact)
       end
 
       it 'is not valid to use a taken phone_number' do
@@ -69,7 +69,7 @@ RSpec.describe PhoneNumber, type: :model do
     end
 
     context 'when contact_id not present' do
-      before { subject.contact_id = nil }
+      before { subject.contact = nil }
 
       it 'is not valid without an user_id' do
         expect { subject.save! }.to raise_error(NoMethodError, "undefined method `phone_numbers' for nil:NilClass")
@@ -83,7 +83,7 @@ RSpec.describe PhoneNumber, type: :model do
         PhoneNumber.new(phone_number: '123',
                         label: 0,
                         main: false,
-                        contact_id: contact.id)
+                        contact: contact)
       end
 
       let(:user) do
@@ -92,7 +92,7 @@ RSpec.describe PhoneNumber, type: :model do
 
       let(:contact) do
         Contact.create!(name: 'Rudolph',
-                        user_id: user.id)
+                        user: user)
       end
 
       it 'sets subject.main to be true before save' do
@@ -109,7 +109,7 @@ RSpec.describe PhoneNumber, type: :model do
         PhoneNumber.new(phone_number: '1234',
                         label: 0,
                         main: true,
-                        contact_id: contact.id)
+                        contact: contact)
       end
 
       let(:user) do
@@ -118,14 +118,14 @@ RSpec.describe PhoneNumber, type: :model do
 
       let(:contact) do
         Contact.create!(name: 'Rudolph',
-                        user_id: user.id)
+                        user: user)
       end
 
       before do
         PhoneNumber.create!(phone_number: '123',
                             label: 1,
                             main: true,
-                            contact_id: contact.id)
+                            contact: contact)
       end
 
       it 'sets all other phone_numbers to be false before save' do

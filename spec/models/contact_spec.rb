@@ -6,7 +6,7 @@ RSpec.describe Contact, type: :model do
   describe 'validations' do
     subject do
       Contact.new(name: 'Rudolph',
-                  user_id: user.id)
+                  user: user)
     end
 
     let(:user) do
@@ -31,7 +31,7 @@ RSpec.describe Contact, type: :model do
     context 'when name has already been taken' do
       before do
         Contact.create!(name: 'Rudolph',
-                        user_id: user.id)
+                        user: user)
       end
 
       it 'is not valid to use a taken phone_number' do
@@ -41,7 +41,7 @@ RSpec.describe Contact, type: :model do
     end
 
     context 'when user_id not present' do
-      before { subject.user_id = nil }
+      before { subject.user = nil }
 
       it 'is not valid without an user_id' do
         expect(subject.valid?).to be_falsey

@@ -15,12 +15,9 @@ class PhoneNumber < ApplicationRecord
   private
 
   def only_one_phone_number_is_main
-    main_counter = 0
+    return unless contact.phone_numbers.where(main: true).count > 1
 
-    contact.phone_numbers.each do |phone_number|
-      main_counter += 1 if phone_number.main?
-    end
-    errors.add(:main, 'Only one phone_number can be main') if main_counter > 1
+    errors.add(:main, 'Only one phone_number can be main')
   end
 
   def ensure_only_one_phone_number_is_main
