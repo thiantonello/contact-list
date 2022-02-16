@@ -1,0 +1,30 @@
+:root {
+  /* fonts */
+  --font-family-default: 'Montserrat', sans-serif;
+
+  /* font-sizes */
+  --font-size-default: 16px;
+
+  /* font-weights */
+  --font-weight-default: 400;
+  --font-weight-bold: 700;
+
+  /* spaces */
+  --space-default: 16px;
+
+  --space-tiny: calc(0.25 * var(--space-default));
+  --space-small: calc(0.5 * var(--space-default));
+  --space-medium: calc(1 * var(--space-default));
+  --space-large: calc(2 * var(--space-default));
+  --space-huge: calc(4 * var(--space-default));
+
+  /* word-spacing */
+  --word-spacing-default: calc(0.25 * var(--font-size-default));
+
+  /* borders */
+  --border-default: 2px solid;
+  --border-radius: 32px;
+
+  /* margins */
+  --margin-default: var(--space-medium);
+}

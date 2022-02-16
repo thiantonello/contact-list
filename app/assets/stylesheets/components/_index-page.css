@@ -1,0 +1,4 @@
+.index-page__header {
+  margin: calc(2 * var(--margin-default));
+  text-align: center;
+}
