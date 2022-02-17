@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+@import 'settings/_defaults.css';
+@import 'settings/_colors.css';
+@import 'generic/_box-sizing.css';
+@import 'generic/_resets.css';
+@import 'elements/_html.css';
+@import 'elements/_body.css';
+@import 'elements/_heading.css';
+@import 'elements/_paragraph.css';
+@import 'elements/_table.css';
+@import 'components/_app-container.css';
+@import 'components/_index-page.css';
+@import 'components/_card.css';

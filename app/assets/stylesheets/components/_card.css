@@ -1,0 +1,7 @@
+.card {
+  margin: var(--margin-default);
+  width: calc(100% - var(--margin-default));
+  border: var(--border-default);
+  border-radius: var(--border-radius);
+  padding: var(--space-default);
+}
