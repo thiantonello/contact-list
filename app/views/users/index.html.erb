@@ -13,6 +13,16 @@
         <td><%= user.biography %></td>
       </tr>
       <tr>
+        <th>Age</th>
+        <td><%= user.age %></td>
+      </tr>
+      <tr>
+        <th>Contacts</th>
+        <td><%= user.contacts.count %></td>
+      </tr>
+      <tr>
+        <th>Phone Numbers</th>
+        <td><%= user.phone_numbers.count %></td>
     </table>
   </div>
 <% end %>
